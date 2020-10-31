@@ -1,8 +1,19 @@
 # entra21-rest
 
-## Criando um novo projeto WebAPI
+## Criando a pasta e o projeto WebAPI
+```
+md WebAPI
+```
+```
+cd WebAPI
+```
 ```
 dotnet new webapi
+```
+
+## Para rodar o projeto:
+```
+dotnet run
 ```
 
 Recurso: Usuario
