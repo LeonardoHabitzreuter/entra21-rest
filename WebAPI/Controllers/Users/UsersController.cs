@@ -7,7 +7,7 @@ namespace WebAPI.Controllers.Users
     [Route("[controller]")]
     public class UsersController : ControllerBase
     {
-        public readonly UsersService _usersService;
+        private readonly UsersService _usersService;
         
         public UsersController()
         {
