@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.AspNetCore.Mvc;
 using Domain.Users;
 
 namespace WebAPI.Controllers.Users
@@ -12,6 +7,13 @@ namespace WebAPI.Controllers.Users
     [Route("[controller]")]
     public class UsersController : ControllerBase
     {
+        public readonly UsersService _usersService;
+        
+        public UsersController()
+        {
+            _usersService = new UsersService();
+        }
+
         [HttpPost]
         public IActionResult Create(CreateUserRequest request)
         {
@@ -20,8 +22,8 @@ namespace WebAPI.Controllers.Users
                 return Unauthorized();
             }
 
-            var user = new User(request.Name, request.Profile);
-            return Ok(user.Id);
+            var userId = _usersService.Create(request.Name, request.Profile);
+            return Ok(userId);
         }
     }
 }
