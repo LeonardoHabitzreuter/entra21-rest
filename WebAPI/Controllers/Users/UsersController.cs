@@ -13,10 +13,15 @@ namespace WebAPI.Controllers.Users
     public class UsersController : ControllerBase
     {
         [HttpPost]
-        public Profile Post(CreateUserRequest request)
+        public IActionResult Create(CreateUserRequest request)
         {
+            if(request.Profile == Profile.CBF && request.Password != "admin123")
+            {
+                return Unauthorized();
+            }
+
             var user = new User(request.Name, request.Profile);
-            return user.Profile;
+            return Ok(user.Id);
         }
     }
 }
