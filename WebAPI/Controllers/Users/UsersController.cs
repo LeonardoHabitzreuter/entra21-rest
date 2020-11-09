@@ -21,11 +21,15 @@ namespace WebAPI.Controllers.Users
             {
                 return Unauthorized();
             }
+            
+            var response = _usersService.Create(request.Name, request.Profile);
 
-            // return BadRequest("O nome está inválido");
-
-            var userId = _usersService.Create(request.Name, request.Profile);
-            return Ok(userId);
+            if (!response.IsValid)
+            {
+                return BadRequest(response.Errors);
+            }
+            
+            return Ok(response.Id);
         }
     }
 }
