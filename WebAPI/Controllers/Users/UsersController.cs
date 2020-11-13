@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Domain.Users;
-using Microsoft.Extensions.Primitives;
-using System;
 
 namespace WebAPI.Controllers.Users
 {
@@ -19,24 +17,11 @@ namespace WebAPI.Controllers.Users
         [HttpPost]
         public IActionResult Create(CreateUserRequest request)
         {
-            StringValues userId;
-            if(!Request.Headers.TryGetValue("UserId", out userId))
+            if(request.Profile == Profile.CBF && request.Password != "admin123")
             {
                 return Unauthorized();
             }
-
-            var user = _usersService.GetById(Guid.Parse(userId));
-
-            if (user == null)
-            {
-                return Unauthorized();
-            }
-
-            if (user.Profile != Profile.CBF)
-            {
-                return Unauthorized();
-            }
-
+            
             var response = _usersService.Create(request.Name, request.Profile);
 
             if (!response.IsValid)
@@ -44,7 +29,7 @@ namespace WebAPI.Controllers.Users
                 return BadRequest(response.Errors);
             }
             
-            return NoContent();
+            return Ok(response.Id);
         }
     }
 }
