@@ -3,7 +3,6 @@ using Domain.Players;
 using Microsoft.Extensions.Primitives;
 using Domain.Users;
 using System;
-using Microsoft.AspNetCore.Authentication;
 
 namespace WebAPI.Controllers.Players
 {
@@ -39,7 +38,6 @@ namespace WebAPI.Controllers.Players
             if (user.Profile == Profile.Supporter)
             {
                 return Unauthorized();
-                // return Forbid("Test");
             }
 
             var response = _playersService.Create(request.Name);

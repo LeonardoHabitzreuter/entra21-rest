@@ -8,10 +8,17 @@ namespace Domain.Users
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public Profile Profile { get; set; }
+        public string Password { get; set; }
 
-        public User(string name, Profile profile) : base(name)
+        public User(string name, Profile profile, string password) : base(name)
         {
             Profile = profile;
+            Password = CryptPassword(password);
+        }
+
+        private string CryptPassword(string pass)
+        {
+            return Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(pass));
         }
 
         public (IList<string> errors, bool isValid) Validate()
@@ -23,5 +30,10 @@ namespace Domain.Users
             }
             return (errors, errors.Count == 0);
         }
+
+        public bool PasswordEquals(string pass)
+        {
+            return Password == CryptPassword(pass);
+        } 
     }
 }
