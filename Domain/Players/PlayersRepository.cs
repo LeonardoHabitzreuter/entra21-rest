@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Domain.Players
 {
@@ -10,6 +12,17 @@ namespace Domain.Players
         public static void Add(Player player)
         {
             _players.Add(player);
+        }
+
+        public static Guid? Remove(Guid id)
+        {
+            var player = _players.FirstOrDefault(x => x.Id == id);
+            if (player == null){
+                return null;
+            }
+
+            _players.Remove(player);
+            return id;
         }
     }
 }
