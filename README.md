@@ -39,3 +39,10 @@ https://localhost:5001/users
     "age": 18
 }
 ```
+
+## Banco de dados
+
+### Para rodar o banco de dados
+```
+docker-compose up
+```
