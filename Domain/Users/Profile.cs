@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Domain.Users
+﻿namespace Domain.Users
 {
     public enum Profile
     {
