@@ -1,10 +1,11 @@
 ﻿using System;
-using System.Linq;
 
 namespace Domain.Users
 {
     public class UsersService
     {
+        private readonly UsersRepository _usersRepository = new UsersRepository();
+
         public CreatedUserDTO Create(string name, Profile profile)
         {
             var user = new User(name, profile);
@@ -12,7 +13,7 @@ namespace Domain.Users
 
             if (userValidation.isValid)
             {
-                UsersRepository.Add(user);
+                _usersRepository.Add(user);
                 return new CreatedUserDTO(user.Id);
             }
 
@@ -21,7 +22,7 @@ namespace Domain.Users
         
         public User GetById(Guid id)
         {
-            return UsersRepository.Users.FirstOrDefault(x => x.Id == id);
+            return _usersRepository.GetById(id);
         }
     }
 }

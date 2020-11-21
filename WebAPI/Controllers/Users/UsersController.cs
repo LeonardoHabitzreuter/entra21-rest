@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Domain.Users;
+using System;
 
 namespace WebAPI.Controllers.Users
 {
@@ -30,6 +31,19 @@ namespace WebAPI.Controllers.Users
             }
             
             return Ok(response.Id);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(Guid id)
+        {
+            var user = _usersService.GetById(id);
+            
+            if (user == null)
+            {
+                return NotFound();
+            }
+            
+            return Ok(user);
         }
     }
 }

@@ -73,3 +73,7 @@ Mapping
 ```
 CREATE DATABASE Brasileirao
 ```
+### Deletar banco de dados
+```
+DROP DATABASE Brasileirao
+```
