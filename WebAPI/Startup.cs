@@ -1,6 +1,7 @@
 using Domain.Infra;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,10 +26,11 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            // using (var db = new BrasileiraoContext())
-            // {
-                
-            // }
+            using (var db = new BrasileiraoContext())
+            {
+                // Este comando irá criar o banco de dados (quando ele ainda não existir)
+                db.Database.Migrate();
+            }
 
             if (env.IsDevelopment())
             {
