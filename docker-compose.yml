@@ -1,11 +1,15 @@
+# versão do yml
 version: '3'
+# Representa os containers que serão criados
 services:
   db:
     user: root
     image: mcr.microsoft.com/mssql/server:2019-latest
     container_name: brasileirao-sqlserver
+    # Nesta linha estamos espelhando a porta 1433 do container com a porta 1433 da nossa máquina
     ports:
       - 1433:1433
+    # Variáveis de ambiente (configurações)
     environment:
       - ACCEPT_EULA=Y
       - SA_PASSWORD=some(!)Password
