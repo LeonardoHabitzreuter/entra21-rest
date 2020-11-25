@@ -1,6 +1,7 @@
 version: '3'
 services:
   db:
+    user: root
     image: mcr.microsoft.com/mssql/server:2019-latest
     container_name: brasileirao-sqlserver
     ports:
@@ -12,5 +13,4 @@ services:
     volumes:
       # lado direito é o pasta do container
       # lado esquerdo pasta da nossa máquina
-      # Windows
       - ./volumes/data:/var/opt/mssql/data
