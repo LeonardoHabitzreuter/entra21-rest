@@ -77,3 +77,34 @@ CREATE DATABASE Brasileirao
 ```
 DROP DATABASE Brasileirao
 ```
+
+# Docker
+Gerencionador de containers
+
+## DockerHub (Parecido com o site do NuGet)
+Repositório de imagens
+
+## Docker-compose
+Ferramenta para auxiliar a criação de containers em ambiente de DESENVOLVIMENTO
+
+## Image (Parecido com ISO)
+Modelo de container
+
+## Container (Parecido com a máquina virtual)
+Um sistema operacional que roda apartado dentro da sua máquina
+Nós temos um Windows 10, temos um container rodando com Alpine Linux dentro da nossa máquina
+
+### Listar os containers que estão rodando
+```
+docker container ls
+```
+
+### Listar todos os containers
+```
+docker container ls -a
+```
+
+### Remover um container
+```
+docker container rm <container_id>
+```

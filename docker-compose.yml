@@ -8,3 +8,9 @@ services:
     environment:
       - ACCEPT_EULA=Y
       - SA_PASSWORD=some(!)Password
+    # espelhamento de pastas entre container e máquina local
+    volumes:
+      # lado direito é o pasta do container
+      # lado esquerdo pasta da nossa máquina
+      # Windows
+      - ./volumes/data:/var/opt/mssql/data
