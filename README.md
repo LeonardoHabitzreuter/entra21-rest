@@ -71,11 +71,20 @@ Mapping
 ## Queries
 ### Criar banco de dados
 ```
-CREATE DATABASE Brasileirao
+CREATE DATABASE <banco>
 ```
 ### Deletar banco de dados
 ```
-DROP DATABASE Brasileirao
+USE master;
+DROP DATABASE <banco>
+```
+### Deletar todos registros
+```
+DELETE FROM <tabela>
+```
+### Deletar uma tabela
+```
+DROP TABLE <tabela>
 ```
 
 # Docker
@@ -107,4 +116,25 @@ docker container ls -a
 ### Remover um container
 ```
 docker container rm <container_id>
+```
+
+## Migrations
+### Adicionar um novo pacote do EF no projeto Domain
+```
+dotnet add package Microsoft.EntityFrameworkCore.Tools
+```
+
+### Instalar a cli de migrations como ferramenta global (para ser usado via terminal)
+```
+dotnet tool install --global dotnet-ef
+```
+
+### Rodar a primeira migração (será lido todas as tabelas registradas via DBSet)
+```
+dotnet ef migrations add InitialCreate
+```
+
+### Rodar as migrações (atualizar o banco de dados)
+```
+dotnet ef database update
 ```
