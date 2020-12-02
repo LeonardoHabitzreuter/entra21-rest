@@ -47,6 +47,16 @@ https://localhost:5001/users
 docker-compose up
 ```
 
+### Para rodar o banco de dados (desanexanco do terminal)
+```
+docker-compose up -d
+```
+
+### Para parar o container do banco de dados
+```
+docker-compose down
+```
+
 ### Para conectar no SQL Server através da extensão do SQL Server
 localhost
 enter
