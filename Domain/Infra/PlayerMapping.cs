@@ -9,7 +9,7 @@ namespace Domain.Infra
         public void Configure(EntityTypeBuilder<Player> builder)
         {
             builder
-                .Property(user => user.Name)
+                .Property(player => player.Name)
                 .IsRequired()
                 .HasMaxLength(100);
         }

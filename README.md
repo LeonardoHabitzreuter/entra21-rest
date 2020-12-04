@@ -128,6 +128,11 @@ docker container ls -a
 docker container rm <container_id>
 ```
 
+## Relações
+### One-to-many
+Relação um para muitos, exemplo:
+Um time tem muitos jogadores
+
 ## Migrations
 ### Adicionar um novo pacote do EF no projeto Domain
 ```
