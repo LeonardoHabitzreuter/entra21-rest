@@ -78,25 +78,6 @@ Object
 Relational
 Mapping
 
-## Queries
-### Criar banco de dados
-```
-CREATE DATABASE <banco>
-```
-### Deletar banco de dados
-```
-USE master;
-DROP DATABASE <banco>
-```
-### Deletar todos registros
-```
-DELETE FROM <tabela>
-```
-### Deletar uma tabela
-```
-DROP TABLE <tabela>
-```
-
 # Docker
 Gerencionador de containers
 
@@ -128,11 +109,6 @@ docker container ls -a
 docker container rm <container_id>
 ```
 
-## Relações
-### One-to-many
-Relação um para muitos, exemplo:
-Um time tem muitos jogadores
-
 ## Migrations
 ### Adicionar um novo pacote do EF no projeto Domain
 ```
@@ -153,3 +129,8 @@ dotnet ef migrations add InitialCreate
 ```
 dotnet ef database update
 ```
+
+## Relações
+### One-to-many
+Relação um para muitos, exemplo:
+Um time tem muitos jogadores
