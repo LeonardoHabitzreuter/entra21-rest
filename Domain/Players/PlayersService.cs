@@ -4,28 +4,13 @@ namespace Domain.Players
 {
     public class PlayersService
     {
-        public CreatedPlayerDTO Create(string name)
+        public CreatedPlayerDTO Create(Guid teamId, string name)
         {
-            var player = new Player(name);
+            var player = new Player(teamId, name);
             var playerValidation = player.Validate();
 
             if (playerValidation.isValid)
             {
-                PlayersRepository.Add(player);
-                return new CreatedPlayerDTO(player.Id);
-            }
-
-            return new CreatedPlayerDTO(playerValidation.errors);
-        }
-
-        public CreatedPlayerDTO Update(Guid id, string name)
-        {
-            var player = new Player(name);
-            var playerValidation = player.Validate();
-
-            if (playerValidation.isValid)
-            {
-                PlayersRepository.Remove(id);
                 PlayersRepository.Add(player);
                 return new CreatedPlayerDTO(player.Id);
             }

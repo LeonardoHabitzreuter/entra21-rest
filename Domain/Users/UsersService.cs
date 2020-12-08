@@ -1,4 +1,5 @@
 ﻿using System;
+using Domain.Common;
 
 namespace Domain.Users
 {
@@ -6,9 +7,17 @@ namespace Domain.Users
     {
         private readonly UsersRepository _usersRepository = new UsersRepository();
 
-        public CreatedUserDTO Create(string name, Profile profile)
+        public CreatedUserDTO Create(
+            string name,
+            Profile profile,
+            string email,
+            string password
+        )
         {
-            var user = new User(name, profile);
+            var crypt = new Crypt();
+            var cryptPassword = crypt.CreateMD5(password);
+            
+            var user = new User(name, cryptPassword, email, profile);
             var userValidation = user.Validate();
 
             if (userValidation.isValid)

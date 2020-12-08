@@ -2,15 +2,17 @@
 {
     public class TeamsService
     {
+        private readonly TeamsRepository _teamsRepository = new TeamsRepository();
+
         public CreatedTeamDTO Create(string name)
         {
-            var Team = new Team(name);
-            var TeamValidation = Team.Validate();
+            var team = new Team(name);
+            var TeamValidation = team.Validate();
 
             if (TeamValidation.isValid)
             {
-                TeamsRepository.Add(Team);
-                return new CreatedTeamDTO(Team.Id);
+                _teamsRepository.Add(team);
+                return new CreatedTeamDTO(team.Id);
             }
 
             return new CreatedTeamDTO(TeamValidation.errors);

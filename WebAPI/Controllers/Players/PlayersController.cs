@@ -3,7 +3,6 @@ using Domain.Players;
 using Microsoft.Extensions.Primitives;
 using Domain.Users;
 using System;
-using Microsoft.AspNetCore.Authentication;
 
 namespace WebAPI.Controllers.Players
 {
@@ -42,38 +41,7 @@ namespace WebAPI.Controllers.Players
                 // return Forbid("Test");
             }
 
-            var response = _playersService.Create(request.Name);
-
-            if (!response.IsValid)
-            {
-                return BadRequest(response.Errors);
-            }
-            
-            return Ok(response.Id);
-        }
-
-        [HttpPut("{id}")]
-        public IActionResult Update(Guid id, CreatePlayerRequest request)
-        {
-            StringValues userId;
-            if(!Request.Headers.TryGetValue("UserId", out userId))
-            {
-                return Unauthorized();
-            }
-
-            var user = _usersService.GetById(Guid.Parse(userId));
-
-            if (user == null)
-            {
-                return Unauthorized();
-            }
-
-            if (user.Profile != Profile.CBF)
-            {
-                return Unauthorized();
-            }
-
-            var response = _playersService.Update(id, request.Name);
+            var response = _playersService.Create(request.TeamId, request.Name);
 
             if (!response.IsValid)
             {

@@ -8,9 +8,14 @@ namespace Domain.Users
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public Profile Profile { get; set; }
+        public string Password { get; set; }
+        // Transformar em VO
+        public string Email { get; set; }
 
-        public User(string name, Profile profile) : base(name)
+        public User(string name, string password, string email, Profile profile) : base(name)
         {
+            Password = password;
+            Email = email;
             Profile = profile;
         }
 

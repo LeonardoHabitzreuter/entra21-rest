@@ -3,7 +3,6 @@ using Domain.Teams;
 using Microsoft.Extensions.Primitives;
 using Domain.Users;
 using System;
-using Microsoft.AspNetCore.Authentication;
 
 namespace WebAPI.Controllers.Teams
 {
@@ -41,14 +40,15 @@ namespace WebAPI.Controllers.Teams
                 return Unauthorized();
             }
 
-            var response = _teamsService.Create(request.Name, request.Players);
+            // var response = _teamsService.Create(request.Name, request.Players);
 
-            if (!response.IsValid)
-            {
-                return BadRequest(response.Errors);
-            }
+            // if (!response.IsValid)
+            // {
+            //     return BadRequest(response.Errors);
+            // }
             
-            return Ok(response.Id);
+            // return Ok(response.Id);
+            return Ok();
         }
     }
 }
