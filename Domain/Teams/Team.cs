@@ -13,10 +13,18 @@ namespace Domain.Teams
         public string Name { get; set; }
         public virtual IList<Player> Players { get; set; }
 
-        public Team(string name)
+        public Team(string name, IList<string> players)
         {
             Name = name;
+            if (players != null)
+            {
+                Players = players
+                    .Select(playerName => new Player(Id, playerName))
+                    .ToList();
+            }
         }
+
+        protected Team() {}
 
         protected bool ValidateName()
         {
@@ -48,6 +56,11 @@ namespace Domain.Teams
             if (!ValidateName())
             {
                 errors.Add("Nome inválido.");
+            }
+            if (Players != null)
+            {
+                Players.Any(player => !player.Validate().isValid);
+                errors.Add("Há jogadores inválidos");
             }
             return (errors, errors.Count == 0);
         }

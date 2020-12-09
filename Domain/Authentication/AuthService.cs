@@ -10,7 +10,7 @@ namespace Domain.Authentication
 
         public AuthResponse Login(string email, string password)
         {
-            var user = _usersRepository.GetByEmail(email);
+            var user = _usersRepository.Get(x => x.Email == email);
             if (user == null)
             {
                 return new AuthResponse();

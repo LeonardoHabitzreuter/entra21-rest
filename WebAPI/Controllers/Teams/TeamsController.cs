@@ -40,15 +40,14 @@ namespace WebAPI.Controllers.Teams
                 return Unauthorized();
             }
 
-            // var response = _teamsService.Create(request.Name, request.Players);
+            var response = _teamsService.Create(request.Name, request.Players);
 
-            // if (!response.IsValid)
-            // {
-            //     return BadRequest(response.Errors);
-            // }
+            if (!response.IsValid)
+            {
+                return BadRequest(response.Errors);
+            }
             
-            // return Ok(response.Id);
-            return Ok();
+            return Ok(response.Id);
         }
     }
 }
