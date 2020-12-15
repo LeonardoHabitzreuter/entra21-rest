@@ -6,7 +6,12 @@ namespace Domain.Authentication
 {
     public class AuthService
     {
-        private readonly UsersRepository _usersRepository = new UsersRepository();
+        private readonly IUsersRepository _usersRepository;
+
+        public AuthService(IUsersRepository usersRepository)
+        {
+            _usersRepository = usersRepository;
+        }
 
         public AuthResponse Login(string email, string password)
         {

@@ -1,9 +1,8 @@
 using System;
-using System.Linq.Expressions;
 
 namespace Domain.Infra
 {
-    class Repository<T> where T : class
+    public class Repository<T> : IRepository<T> where T : class
     {
         public void Add(T entity)
         {
@@ -14,7 +13,7 @@ namespace Domain.Infra
             }
         }
 
-        public T Get(Expression<Func<T, bool>> predicate)
+        public T Get(Func<T, bool> predicate)
         {
             using (var db = new BrasileiraoContext())
             {

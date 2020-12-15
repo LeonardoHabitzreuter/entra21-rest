@@ -1,4 +1,5 @@
 using Domain.Infra;
+using Domain.Users;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,11 @@ namespace WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            // services.AddSingleton(typeof (IRepository<>), typeof (RepositoryInMemory<>));
+            services.AddScoped(typeof (IRepository<>), typeof (Repository<>));
+            services.AddScoped<IUsersRepository, UsersRepository>();
+            services.AddScoped<IUsersService, UsersService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

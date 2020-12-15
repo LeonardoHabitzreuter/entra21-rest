@@ -11,11 +11,11 @@ namespace WebAPI.Controllers.Players
     public class PlayersController : ControllerBase
     {
         private readonly PlayersService _playersService;
-        private readonly UsersService _usersService;
+        private readonly IUsersService _usersService;
         
-        public PlayersController()
+        public PlayersController(IUsersService usersService)
         {
-            _usersService = new UsersService();
+            _usersService = usersService;
             _playersService = new PlayersService();
         }
 

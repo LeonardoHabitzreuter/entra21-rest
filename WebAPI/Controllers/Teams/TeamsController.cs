@@ -11,11 +11,11 @@ namespace WebAPI.Controllers.Teams
     public class TeamsController : ControllerBase
     {
         private readonly TeamsService _teamsService;
-        private readonly UsersService _usersService;
+        private readonly IUsersService _usersService;
         
-        public TeamsController()
+        public TeamsController(IUsersService usersService)
         {
-            _usersService = new UsersService();
+            _usersService = usersService;
             _teamsService = new TeamsService();
         }
 

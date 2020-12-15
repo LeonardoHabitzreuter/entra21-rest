@@ -9,11 +9,11 @@ namespace WebAPI.Controllers.Users
     [Route("[controller]")]
     public class UsersController : ControllerBase
     {
-        private readonly UsersService _usersService;
+        private readonly IUsersService _usersService;
         
-        public UsersController()
+        public UsersController(IUsersService usersService)
         {
-            _usersService = new UsersService();
+            _usersService = usersService;
         }
 
         [HttpPost]
