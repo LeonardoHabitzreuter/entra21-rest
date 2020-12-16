@@ -29,6 +29,7 @@ namespace Domain.Authentication
                 : new AuthResponse();
         }
         
+        [Obsolete("Utilize o método do IUsersService")]
         public User GetById(Guid id)
         {
             return _usersRepository.GetById(id);
