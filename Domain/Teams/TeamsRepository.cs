@@ -1,8 +1,25 @@
-﻿using Domain.Infra;
+﻿
+using System;
+using Domain.Common;
 
 namespace Domain.Teams
 {
-    class TeamsRepository : Repository<Team>
+    class TeamsRepository : ITeamsRepository
     {
+        private readonly IRepository<Team> _repository;
+
+        public TeamsRepository(IRepository<Team> repository)
+        {
+            _repository = repository;
+        }
+        public void Add(Team team)
+        {
+            _repository.Add(team);
+        }
+
+        public Team Get(Func<Team, bool> predicate)
+        {
+            return _repository.Get(predicate);
+        }
     }
 }

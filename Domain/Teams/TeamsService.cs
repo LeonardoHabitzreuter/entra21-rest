@@ -4,7 +4,11 @@ namespace Domain.Teams
 {
     public class TeamsService
     {
-        private readonly TeamsRepository _teamsRepository = new TeamsRepository();
+        private readonly ITeamsRepository _teamsRepository;
+        public TeamsService(ITeamsRepository teamsRepository)
+        {
+            _teamsRepository = teamsRepository;
+        }
 
         public CreatedTeamDTO Create(string name, IList<string> playersNames)
         {
