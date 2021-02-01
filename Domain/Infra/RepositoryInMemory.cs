@@ -19,5 +19,10 @@ namespace Domain.Infra
         {
             return _entities.FirstOrDefault(predicate);
         }
+
+        public T Get(Guid id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -23,12 +23,9 @@ namespace Domain.Users
             return _repository.Get(predicate);
         }
 
-        public User GetById(Guid id)
+        public User Get(Guid id)
         {
-            using (var db = new BrasileiraoContext())
-            {
-                return db.Users.FirstOrDefault(x => x.Id == id);
-            }
+            return _repository.Get(id);
         }
     }
 }
