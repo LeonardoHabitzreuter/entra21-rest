@@ -3,7 +3,7 @@ using Domain.Common;
 
 namespace Domain.Infra
 {
-    public class Repository<T> : IRepository<T> where T : class
+    public class Repository<T> : IRepository<T> where T : Entity
     {
         public void Add(T entity)
         {

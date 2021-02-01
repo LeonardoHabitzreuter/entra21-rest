@@ -7,7 +7,6 @@ namespace Domain.Users
 {
     public class User : Person
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
         public Profile Profile { get; set; }
         public string Password { get; set; }
         // Transformar em VO

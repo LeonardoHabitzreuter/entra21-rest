@@ -2,7 +2,7 @@ using System;
 
 namespace Domain.Common
 {
-    public interface IRepository<T> where T : class
+    public interface IRepository<T> where T : Entity
     {
         void Add(T entity);
 

@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Domain.People;
+using Domain.Common;
 using Domain.Players;
 
 namespace Domain.Teams
 {
-    public class Team
+    public class Team : Entity
     {
-        public Guid Id { get; private set; } = Guid.NewGuid();
         public int Goals { get; private set; }
         public string Name { get; set; }
         public virtual IList<Player> Players { get; set; }

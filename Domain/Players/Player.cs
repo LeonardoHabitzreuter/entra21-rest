@@ -8,7 +8,6 @@ namespace Domain.Players
 {
     public class Player : Person
     {
-        public Guid Id { get; private set; } = Guid.NewGuid();
         public int Goals { get; private set; }
         // A propriedade virtual indica ao EF que é uma propriedade de navegação
         public virtual Team Team { get; private set; }

@@ -1,9 +1,10 @@
 using System.Linq;
+using Domain.Common;
 
 namespace Domain.People
 {
     // abstract pois não deveríamos instanciar a classe Person
-    public abstract class Person
+    public abstract class Person : Entity
     {
         public string Name { get; protected set; }
 
