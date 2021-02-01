@@ -1,3 +1,4 @@
+using Domain.Common;
 using Domain.Infra;
 using Domain.Users;
 using Microsoft.AspNetCore.Builder;

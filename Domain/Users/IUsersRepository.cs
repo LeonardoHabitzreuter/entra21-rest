@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Linq;
-using Domain.Infra;
+using Domain.Common;
 
 namespace Domain.Users
 {

@@ -1,6 +1,6 @@
 using System;
 
-namespace Domain.Infra
+namespace Domain.Common
 {
     public interface IRepository<T> where T : class
     {
