@@ -3,7 +3,7 @@ using Domain.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Domain.Infra
+namespace Infra.Mappings
 {
     public class UserMapping : IEntityTypeConfiguration<User>
     {

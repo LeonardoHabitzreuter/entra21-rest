@@ -24,7 +24,7 @@ namespace Domain.Teams
 
         public Team Get(Guid id)
         {
-            throw new NotImplementedException();
+            return _repository.Get(id);
         }
   }
 }

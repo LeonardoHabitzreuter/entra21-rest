@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using Domain.Common;
 
-namespace Domain.Infra
+namespace Infra
 {
     public class Repository<T> : IRepository<T> where T : Entity
     {

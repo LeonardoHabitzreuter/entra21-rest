@@ -1,5 +1,5 @@
 using Domain.Common;
-using Domain.Infra;
+using Infra;
 using Domain.Users;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -50,6 +50,7 @@ namespace WebAPI
             using (var db = new BrasileiraoContext())
             {
                 // Este comando irá criar o banco de dados (quando ele ainda não existir)
+                // Também executará todas as migrations e seeders
                 db.Database.Migrate();
             }
 

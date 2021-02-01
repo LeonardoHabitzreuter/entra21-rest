@@ -4,7 +4,7 @@ using Domain.Teams;
 using Domain.Users;
 using Microsoft.EntityFrameworkCore;
 
-namespace Domain.Infra
+namespace Infra
 {
     public class BrasileiraoContext : DbContext
     {

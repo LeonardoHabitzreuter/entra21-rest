@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Domain.Common;
 
-namespace Domain.Infra
+namespace Infra
 {
     public class RepositoryInMemory<T> : IRepository<T> where T : Entity
     {
@@ -22,7 +22,7 @@ namespace Domain.Infra
 
         public T Get(Guid id)
         {
-            throw new NotImplementedException();
+            return _entities.FirstOrDefault(x => x.Id == id);
         }
     }
 }
