@@ -1,3 +1,4 @@
+using Domain.Common;
 using Domain.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -8,6 +9,16 @@ namespace Domain.Infra
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
+            var crypt = new Crypt();
+            var cryptPassword = crypt.CreateMD5("123");
+
+            builder.HasData(new User(
+                "Sys Admin",
+                cryptPassword,
+                "sysadmin@company.com",
+                Profile.CBF
+            ));
+
             builder
                 .Property(user => user.Name)
                 .IsRequired()
