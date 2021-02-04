@@ -4,7 +4,7 @@ using Domain.Common;
 
 namespace Domain.Teams
 {
-    class TeamsRepository : ITeamsRepository
+    public class TeamsRepository : ITeamsRepository
     {
         private readonly IRepository<Team> _repository;
 

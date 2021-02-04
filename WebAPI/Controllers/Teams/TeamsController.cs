@@ -3,6 +3,8 @@ using Domain.Teams;
 using Microsoft.Extensions.Primitives;
 using Domain.Users;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace WebAPI.Controllers.Teams
 {
@@ -10,10 +12,10 @@ namespace WebAPI.Controllers.Teams
     [Route("[controller]")]
     public class TeamsController : ControllerBase
     {
-        private readonly TeamsService _teamsService;
+        private readonly ITeamsService _teamsService;
         private readonly IUsersService _usersService;
 
-        public TeamsController(IUsersService usersService, TeamsService teamsService)
+        public TeamsController(IUsersService usersService, ITeamsService teamsService)
         {
             _usersService = usersService;
             _teamsService = teamsService;

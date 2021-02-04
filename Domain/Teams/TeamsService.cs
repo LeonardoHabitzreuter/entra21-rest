@@ -2,7 +2,7 @@
 
 namespace Domain.Teams
 {
-    public class TeamsService
+    public class TeamsService : ITeamsService
     {
         private readonly ITeamsRepository _teamsRepository;
         public TeamsService(ITeamsRepository teamsRepository)

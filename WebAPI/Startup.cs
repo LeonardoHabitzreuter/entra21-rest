@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Domain.Teams;
 
 namespace WebAPI
 {
@@ -41,6 +42,8 @@ namespace WebAPI
             services.AddScoped(typeof (IRepository<>), typeof (Repository<>));
             services.AddScoped<IUsersRepository, UsersRepository>();
             services.AddScoped<IUsersService, UsersService>();
+            services.AddScoped<ITeamsRepository, TeamsRepository>();
+            services.AddScoped<ITeamsService, TeamsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
