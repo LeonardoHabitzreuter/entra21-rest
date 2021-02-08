@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Domain.Users;
 using System;
-using Microsoft.Extensions.Primitives;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace WebAPI.Controllers.Users
 {
@@ -17,26 +18,9 @@ namespace WebAPI.Controllers.Users
         }
 
         [HttpPost]
+        [Authorize(Roles = "CBF")]
         public IActionResult Create(CreateUserRequest request)
         {
-            StringValues userId;
-            if(!Request.Headers.TryGetValue("UserId", out userId))
-            {
-                return Unauthorized();
-            }
-
-            var user = _usersService.GetById(Guid.Parse(userId));
-
-            if (user == null)
-            {
-                return Unauthorized();
-            }
-
-            if (user.Profile == Profile.Supporter)
-            {
-                return Unauthorized();
-            }
-
             var response = _usersService.Create(
                 request.Name,
                 request.Profile,
@@ -52,10 +36,12 @@ namespace WebAPI.Controllers.Users
             return NoContent();
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetById(Guid id)
+        [HttpGet("me")]
+        [Authorize]
+        public IActionResult GetById()
         {
-            var user = _usersService.GetById(id);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = _usersService.GetById(Guid.Parse(userId));
             
             if (user == null)
             {

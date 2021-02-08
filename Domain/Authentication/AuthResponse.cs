@@ -1,15 +1,13 @@
-using System;
-
 namespace Domain.Authentication
 {
     public class AuthResponse
     {
-        public Guid UserId { get; set; }
+        public string Token { get; set; }
         public bool IsValid { get; set; }
 
-        public AuthResponse(Guid id)
+        public AuthResponse(string token)
         {
-            UserId = id;
+            Token = token;
             IsValid = true;
         }
 

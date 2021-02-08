@@ -15,7 +15,7 @@ namespace Domain.Users
 
         public CreatedUserDTO Create(
             string name,
-            Profile profile,
+            UserProfile profile,
             string email,
             string password
         )

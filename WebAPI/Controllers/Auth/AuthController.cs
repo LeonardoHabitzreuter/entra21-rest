@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Domain.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebAPI.Controllers.Auth
 {
@@ -14,6 +15,7 @@ namespace WebAPI.Controllers.Auth
             _authService = authService;
         }
 
+        [AllowAnonymous]
         [HttpPost("login")]
         public IActionResult Login(LoginRequest request)
         {   
@@ -24,7 +26,7 @@ namespace WebAPI.Controllers.Auth
                 return BadRequest("Email ou senha inválido");
             }
             
-            return Ok(response.UserId);
+            return Ok(response.Token);
         }
     }
 }

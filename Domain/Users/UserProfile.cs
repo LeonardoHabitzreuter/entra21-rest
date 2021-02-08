@@ -1,6 +1,6 @@
 ﻿namespace Domain.Users
 {
-    public enum Profile
+    public enum UserProfile
     {
         CBF = 0,
         Supporter = 1

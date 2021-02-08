@@ -22,26 +22,7 @@ namespace WebAPI.Controllers.Players
         [HttpPost]
         public IActionResult Create(CreatePlayerRequest request)
         {
-            StringValues userId;
-            if(!Request.Headers.TryGetValue("UserId", out userId))
-            {
-                return Unauthorized();
-            }
-
-            var user = _usersService.GetById(Guid.Parse(userId));
-
-            if (user == null)
-            {
-                return Unauthorized();
-            }
-
-            if (user.Profile == Profile.Supporter)
-            {
-                return Unauthorized();
-                // return Forbid("Test");
-            }
-
-            var response = _playersService.Create(request.TeamId, request.Name);
+           var response = _playersService.Create(request.TeamId, request.Name);
 
             if (!response.IsValid)
             {
@@ -54,24 +35,6 @@ namespace WebAPI.Controllers.Players
         [HttpDelete("{id}")]
         public IActionResult Remove(Guid id)
         {
-            StringValues userId;
-            if(!Request.Headers.TryGetValue("UserId", out userId))
-            {
-                return Unauthorized();
-            }
-
-            var user = _usersService.GetById(Guid.Parse(userId));
-
-            if (user == null)
-            {
-                return Unauthorized();
-            }
-
-            if (user.Profile != Profile.CBF)
-            {
-                return Unauthorized();
-            }
-
             var playerRemoved = _playersService.Remove(id);
 
             if (playerRemoved == null)

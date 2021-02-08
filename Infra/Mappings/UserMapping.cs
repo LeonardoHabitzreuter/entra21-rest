@@ -16,7 +16,7 @@ namespace Infra.Mappings
                 "Sys Admin",
                 cryptPassword,
                 "sysadmin@company.com",
-                Profile.CBF
+                UserProfile.CBF
             ));
 
             builder

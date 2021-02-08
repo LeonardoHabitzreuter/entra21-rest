@@ -19,16 +19,13 @@ namespace Infra
         {
             using (var db = new BrasileiraoContext())
             {
-                return db.Find<T>(predicate);
+                return db.Set<T>().SingleOrDefault(predicate);
             }
         }
 
         public T Get(Guid id)
         {
-            using (var db = new BrasileiraoContext())
-            {
-                return db.Set<T>().SingleOrDefault(x => x.Id == id);
-            }
+            return Get(x => x.Id == id);
         }
     }
 }

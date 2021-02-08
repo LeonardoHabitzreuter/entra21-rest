@@ -1,16 +1,17 @@
-﻿using System;
-using Domain.Common;
+﻿using Domain.Common;
 using Domain.Users;
 
 namespace Domain.Authentication
 {
-    public class AuthService
+    public class AuthService : IAuthService
     {
         private readonly IUsersRepository _usersRepository;
+        private readonly ITokenService _tokenService;
 
-        public AuthService(IUsersRepository usersRepository)
+        public AuthService(IUsersRepository usersRepository, ITokenService tokenService)
         {
             _usersRepository = usersRepository;
+            _tokenService = tokenService;
         }
 
         public AuthResponse Login(string email, string password)
@@ -24,9 +25,13 @@ namespace Domain.Authentication
             var crypt = new Crypt();
             var cryptPassword = crypt.CreateMD5(password);
 
-            return user.Password == cryptPassword
-                ? new AuthResponse(user.Id)
-                : new AuthResponse();
+            if (user.Password != cryptPassword)
+            {
+                return new AuthResponse();
+            }
+
+            var token = _tokenService.GenerateToken(user);
+            return new AuthResponse(token);
         }
     }
 }

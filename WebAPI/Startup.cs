@@ -8,11 +8,16 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Domain.Teams;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using Domain.Authentication;
 
 namespace WebAPI
 {
     public class Startup
     {
+        private const string Secret = "mY.Sec&rt@Ke2021";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -37,6 +42,25 @@ namespace WebAPI
             });
 
             services.AddControllers();
+            
+            var key = Encoding.ASCII.GetBytes(Secret);
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
 
             // services.AddSingleton(typeof (IRepository<>), typeof (RepositoryInMemory<>));
             services.AddScoped(typeof (IRepository<>), typeof (Repository<>));
@@ -44,18 +68,20 @@ namespace WebAPI
             services.AddScoped<IUsersService, UsersService>();
             services.AddScoped<ITeamsRepository, TeamsRepository>();
             services.AddScoped<ITeamsService, TeamsService>();
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<ITokenService, TokenService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseCors("any");
-            using (var db = new BrasileiraoContext())
-            {
-                // Este comando irá criar o banco de dados (quando ele ainda não existir)
-                // Também executará todas as migrations e seeders
-                db.Database.Migrate();
-            }
+            // using (var db = new BrasileiraoContext())
+            // {
+            //     // Este comando irá criar o banco de dados (quando ele ainda não existir)
+            //     // Também executará todas as migrations e seeders
+            //     db.Database.Migrate();
+            // }
 
             if (env.IsDevelopment())
             {
@@ -66,6 +92,7 @@ namespace WebAPI
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
