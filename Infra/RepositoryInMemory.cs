@@ -24,5 +24,10 @@ namespace Infra
         {
             return _entities.FirstOrDefault(x => x.Id == id);
         }
+
+        public void Remove(T entity)
+        {
+            _entities.Remove(entity);
+        }
     }
 }

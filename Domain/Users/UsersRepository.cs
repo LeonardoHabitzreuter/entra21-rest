@@ -25,5 +25,10 @@ namespace Domain.Users
         {
             return _repository.Get(id);
         }
+
+        public void Remove(User entity)
+        {
+            _repository.Remove(entity);
+        }
     }
 }

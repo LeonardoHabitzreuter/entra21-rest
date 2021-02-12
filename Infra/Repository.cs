@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Domain.Common;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infra
 {
@@ -26,6 +27,15 @@ namespace Infra
         public T Get(Guid id)
         {
             return Get(x => x.Id == id);
+        }
+
+        public void Remove(T entity)
+        {
+            using (var db = new BrasileiraoContext())
+            {
+                db.Entry(entity).State = EntityState.Deleted;
+                db.SaveChanges();
+            }
         }
     }
 }

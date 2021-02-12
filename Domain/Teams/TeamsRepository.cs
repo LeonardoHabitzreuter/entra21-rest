@@ -26,5 +26,10 @@ namespace Domain.Teams
         {
             return _repository.Get(id);
         }
-  }
+
+        public void Remove(Team entity)
+        {
+            _repository.Remove(entity);
+        }
+    }
 }
