@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Domain.Authentication;
+using FluentValidation.AspNetCore;
+using WebAPI.Controllers.Users;
 
 namespace WebAPI
 {
@@ -41,7 +43,9 @@ namespace WebAPI
                 );
             });
 
-            services.AddControllers();
+            services
+                .AddControllers()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateUserValidator>());
             
             var key = Encoding.ASCII.GetBytes(Secret);
             services.AddAuthentication(x =>
@@ -69,6 +73,7 @@ namespace WebAPI
             services.AddScoped<ITeamsRepository, TeamsRepository>();
             services.AddScoped<ITeamsService, TeamsService>();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<ICrypt, Crypt>();
             services.AddScoped<ITokenService, TokenService>();
         }
 
