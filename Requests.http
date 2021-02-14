@@ -1,11 +1,10 @@
 POST https://localhost:5001/users HTTP/1.1
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Ikpob24gV2ljayIsInJvbGUiOiJTdXBwb3J0ZXIiLCJuYmYiOjE2MTI3MzY1MDEsImV4cCI6MTYxMjczNjYyMSwiaWF0IjoxNjEyNzM2NTAxfQ.fNryTDxrVJFpz4eDyL8ZPn0H0I_S8O7XotAXHLFTSxQ
 
 {
     "name": "Jhon Wick",
     "profile": 1,
-    "password": "123456",
+    "password": "",
     "email": "jhon.wick@gmail.com"
 }
 

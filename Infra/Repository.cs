@@ -38,5 +38,14 @@ namespace Infra
         {
             return Get(x => x.Id == id);
         }
+
+        public void Remove(T entity)
+        {
+            using (var db = new BrasileiraoContext())
+            {
+                db.Entry(entity).State = EntityState.Deleted;
+                db.SaveChanges();
+            }
+        }
     }
 }

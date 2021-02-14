@@ -32,5 +32,10 @@ namespace Domain.Users
         {
             return _repository.GetAllIncluding(includes);
         }
+        
+        public void Remove(User entity)
+        {
+            _repository.Remove(entity);
+        }
     }
 }

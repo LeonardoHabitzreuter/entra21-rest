@@ -1,4 +1,3 @@
-using System;
 using Domain.Users;
 using Xunit;
 
@@ -16,7 +15,7 @@ namespace Tests.Domain.Users
         [InlineData("joao.silva@com")]
         public void Should_return_false_when_email_is_invalid(string email)
         {
-            var user = new User("João da Silva", "pass", email, Profile.CBF);
+            var user = new User("João da Silva", "pass", email, UserProfile.CBF);
 
             var userIsValid = user.Validate().isValid;
 
@@ -30,7 +29,7 @@ namespace Tests.Domain.Users
         [InlineData("rodrigo789.dourado@bol.com.br")]
         public void Should_return_true_when_email_is_valid(string email)
         {
-            var user = new User("João da Silva", "pass", email, Profile.CBF);
+            var user = new User("João da Silva", "pass", email, UserProfile.CBF);
 
             var userIsValid = user.Validate().isValid;
 

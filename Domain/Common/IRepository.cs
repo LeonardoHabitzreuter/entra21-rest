@@ -10,5 +10,6 @@ namespace Domain.Common
         IList<T> GetAllIncluding<TProperty>(Expression<Func<T, TProperty>> includes);
         T Get(Func<T, bool> predicate);
         T Get(Guid id);
+        void Remove(T entity);
     }
 }

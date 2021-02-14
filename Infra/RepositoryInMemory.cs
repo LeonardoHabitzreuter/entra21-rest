@@ -35,5 +35,10 @@ namespace Infra
         {
             return _entities;
         }
+
+        public void Remove(T entity)
+        {
+            _entities.Remove(entity);
+        }
     }
 }

@@ -33,5 +33,10 @@ namespace Domain.Teams
         {
             return _repository.GetAllIncluding(includes);
         }
+
+        public void Remove(Team entity)
+        {
+            _repository.Remove(entity);
+        }
     }
 }
