@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Domain.Common;
-using Domain.Players;
+using Domain.TeamPlayers;
 
 namespace Domain.Teams
 {
@@ -9,17 +9,11 @@ namespace Domain.Teams
     {
         public int Goals { get; private set; }
         public string Name { get; set; }
-        public virtual IList<Player> Players { get; set; }
+        public virtual IList<TeamPlayer> Players { get; set; }
 
-        public Team(string name, IList<string> players)
+        public Team(string name)
         {
             Name = name;
-            if (players != null)
-            {
-                Players = players
-                    .Select(playerName => new Player(Id, playerName))
-                    .ToList();
-            }
         }
 
         protected Team() {}
@@ -54,11 +48,6 @@ namespace Domain.Teams
             if (!ValidateName())
             {
                 errors.Add("Nome inválido.");
-            }
-            if (Players != null)
-            {
-                Players.Any(player => !player.Validate().isValid);
-                errors.Add("Há jogadores inválidos");
             }
             return (errors, errors.Count == 0);
         }

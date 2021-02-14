@@ -1,28 +1,37 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Linq.Expressions;
+using Domain.Common;
 
 namespace Domain.Players
 {
-    static class PlayersRepository
+    public class PlayersRepository : IPlayersRepository
     {
-        private static List<Player> _players = new List<Player>();
-        public static IReadOnlyCollection<Player> Players => _players;
+        private readonly IRepository<Player> _repository;
 
-        public static void Add(Player player)
+        public PlayersRepository(IRepository<Player> repository)
         {
-            _players.Add(player);
+            _repository = repository;
+        }
+        public void Add(Player player)
+        {
+            _repository.Add(player);
         }
 
-        public static Guid? Remove(Guid id)
+        public Player Get(Func<Player, bool> predicate)
         {
-            var player = _players.FirstOrDefault(x => x.Id == id);
-            if (player == null){
-                return null;
-            }
+            return _repository.Get(predicate);
+        }
 
-            _players.Remove(player);
-            return id;
+        public Player Get(Guid id)
+        {
+            return _repository.Get(id);
+        }
+
+        public IList<Player> GetAllIncluding<TProperty>(Expression<Func<Player, TProperty>> includes)
+        {
+            return _repository.GetAllIncluding(includes);
         }
     }
 }

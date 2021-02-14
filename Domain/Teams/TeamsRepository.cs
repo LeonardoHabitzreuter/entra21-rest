@@ -1,5 +1,7 @@
 ﻿
 using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using Domain.Common;
 
 namespace Domain.Teams
@@ -26,5 +28,10 @@ namespace Domain.Teams
         {
             return _repository.Get(id);
         }
-  }
+
+        public IList<Team> GetAllIncluding<TProperty>(Expression<Func<Team, TProperty>> includes)
+        {
+            return _repository.GetAllIncluding(includes);
+        }
+    }
 }

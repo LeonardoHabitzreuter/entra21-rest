@@ -33,14 +33,27 @@ namespace Infra.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.HasKey("Id");
+
+                    b.ToTable("Players");
+                });
+
+            modelBuilder.Entity("Domain.TeamPlayers.TeamPlayer", b =>
+                {
                     b.Property<Guid>("TeamId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                    b.Property<Guid>("PlayerId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.HasIndex("TeamId");
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.ToTable("Players");
+                    b.HasKey("TeamId", "PlayerId");
+
+                    b.HasIndex("PlayerId");
+
+                    b.ToTable("TeamPlayers");
                 });
 
             modelBuilder.Entity("Domain.Teams.Team", b =>
@@ -96,7 +109,7 @@ namespace Infra.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("8f74c74f-3e5a-446d-a244-f8647c5d3c05"),
+                            Id = new Guid("0f22f027-d13f-4dc0-b429-83e6d348f640"),
                             Email = "sysadmin@company.com",
                             Name = "Sys Admin",
                             Password = "202CB962AC59075B964B07152D234B70",
@@ -104,15 +117,28 @@ namespace Infra.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Domain.Players.Player", b =>
+            modelBuilder.Entity("Domain.TeamPlayers.TeamPlayer", b =>
                 {
+                    b.HasOne("Domain.Players.Player", "Player")
+                        .WithMany("Teams")
+                        .HasForeignKey("PlayerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Domain.Teams.Team", "Team")
                         .WithMany("Players")
                         .HasForeignKey("TeamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Player");
+
                     b.Navigation("Team");
+                });
+
+            modelBuilder.Entity("Domain.Players.Player", b =>
+                {
+                    b.Navigation("Teams");
                 });
 
             modelBuilder.Entity("Domain.Teams.Team", b =>

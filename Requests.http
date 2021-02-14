@@ -13,13 +13,33 @@ POST https://localhost:5001/auth/login HTTP/1.1
 content-type: application/json
 
 {
-    "email": "jhon.wick@gmail.com",
-    "password": "123456"
+    "email": "sysadmin@company.com",
+    "password": "123"
 }
 
 GET https://localhost:5001/teams HTTP/1.1
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Ikpob24gV2ljayIsInJvbGUiOiJTdXBwb3J0ZXIiLCJuYmYiOjE2MTI3MzY1MDEsImV4cCI6MTYxMjczNjYyMSwiaWF0IjoxNjEyNzM2NTAxfQ.fNryTDxrVJFpz4eDyL8ZPn0H0I_S8O7XotAXHLFTSxQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IlN5cyBBZG1pbiIsIm5hbWVpZCI6IjBmMjJmMDI3LWQxM2YtNGRjMC1iNDI5LTgzZTZkMzQ4ZjY0MCIsInJvbGUiOiJDQkYiLCJuYmYiOjE2MTMwNjczNjUsImV4cCI6MTYxMzA3NDU2NSwiaWF0IjoxNjEzMDY3MzY1fQ.5HsWWqhGOiDxAbVq1W1mEN1yAsyVxDgv1-E0Inuqzxc
+
+
+
+POST https://localhost:5001/teams HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IlN5cyBBZG1pbiIsIm5hbWVpZCI6IjBmMjJmMDI3LWQxM2YtNGRjMC1iNDI5LTgzZTZkMzQ4ZjY0MCIsInJvbGUiOiJDQkYiLCJuYmYiOjE2MTMwNjUwMDUsImV4cCI6MTYxMzA3MjIwNSwiaWF0IjoxNjEzMDY1MDA1fQ.0EyTGuUBWdTJ6P6KPmyVp_TdZroW79fRzR6HVyBXuE0
+
+{
+    "name": "Flamengo"
+}
+
+POST https://localhost:5001/players HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IlN5cyBBZG1pbiIsIm5hbWVpZCI6IjBmMjJmMDI3LWQxM2YtNGRjMC1iNDI5LTgzZTZkMzQ4ZjY0MCIsInJvbGUiOiJDQkYiLCJuYmYiOjE2MTMwNjUwMDUsImV4cCI6MTYxMzA3MjIwNSwiaWF0IjoxNjEzMDY1MDA1fQ.0EyTGuUBWdTJ6P6KPmyVp_TdZroW79fRzR6HVyBXuE0
+
+{
+    "name": "Gabriel Barbosa",
+    "teamId": "d7c524df-6482-4564-acda-e94fd7a504e8"
+}
+
 
 
 GET https://localhost:5001/users/me HTTP/1.1

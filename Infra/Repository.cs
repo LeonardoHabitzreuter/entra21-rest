@@ -1,6 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using Domain.Common;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infra
 {
@@ -12,6 +15,14 @@ namespace Infra
             {
                 db.Add<T>(entity);
                 db.SaveChanges();
+            }
+        }
+
+        public IList<T> GetAllIncluding<TProperty>(Expression<Func<T, TProperty>> includes)
+        {
+            using (var db = new BrasileiraoContext())
+            {
+                return db.Set<T>().Include(includes).ToList();
             }
         }
 

@@ -10,9 +10,9 @@ namespace Domain.Teams
             _teamsRepository = teamsRepository;
         }
 
-        public CreatedTeamDTO Create(string name, IList<string> playersNames)
+        public CreatedTeamDTO Create(string name)
         {
-            var team = new Team(name, playersNames);
+            var team = new Team(name);
             var TeamValidation = team.Validate();
 
             if (TeamValidation.isValid)
@@ -22,6 +22,11 @@ namespace Domain.Teams
             }
 
             return new CreatedTeamDTO(TeamValidation.errors);
+        }
+
+        public IList<Team> GetAll()
+        {
+            return _teamsRepository.GetAllIncluding(x => x.Players);
         }
     }
 }

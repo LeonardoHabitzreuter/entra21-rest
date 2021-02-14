@@ -23,7 +23,7 @@ namespace WebAPI.Controllers.Teams
         [HttpPost]
         public IActionResult Create(CreateTeamRequest request)
         {
-            var response = _teamsService.Create(request.Name, request.Players);
+            var response = _teamsService.Create(request.Name);
 
             if (!response.IsValid)
             {
@@ -34,25 +34,24 @@ namespace WebAPI.Controllers.Teams
         }
 
         [HttpGet]
-        [Authorize(Roles = "CBF,Supporter")]
+        // [Authorize(Roles = "CBF,Supporter")]
         public IActionResult Get(string name)
         {
-            var teams = new List<Team>
-            {
-                new Team("Atletico Paranaense", new []{"Rony", "Madson", "Marcelo Cirino", "Léo Pereira", "Zé Evaldo"}),
-                new Team("Atletico Mineiro", new []{"Hulk", "Guga", "Réver", "Victor", "Igor Rabelo"}),
-                new Team("Parmera", new []{"Luix Adriano", "Breno", "Dudu", "Zé Rafael", "Marcos Rocha"}),
-                new Team("Framengo", new []{"Coringa", "Neneca", "Gabigol", "Everton Miteiro", "Carrascaeta"})
-            };
+            var teams = _teamsService.GetAll();
 
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                return Ok(teams);
-            }
+            // if (string.IsNullOrWhiteSpace(name))
+            // {
+            //     return Ok(teams);
+            // }
 
-            var transformedName = name.ToLower().Trim();
-            var filteredTeams = teams.Where(x => x.Name.ToLower().Contains(transformedName));
-            return Ok(filteredTeams);
+            // var transformedName = name.ToLower().Trim();
+            // var filteredTeams = teams.Where(x => x.Name.ToLower().Contains(transformedName));
+            
+            var resp = teams.Select(x => new {
+                name = x.Name,
+                players = x.Players.Select(y => y.Player.Name)
+            });
+            return Ok(resp);
         }
     }
 }

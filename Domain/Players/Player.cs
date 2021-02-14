@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Domain.People;
-using Domain.Teams;
+using Domain.TeamPlayers;
 
 namespace Domain.Players
 {
@@ -10,12 +8,10 @@ namespace Domain.Players
     {
         public int Goals { get; private set; }
         // A propriedade virtual indica ao EF que é uma propriedade de navegação
-        public virtual Team Team { get; private set; }
-        public Guid TeamId { get; private set; }
+        public virtual IList<TeamPlayer> Teams { get; set; }
 
-        public Player(Guid teamId, string name) : base(name)
+        public Player(string name) : base(name)
         {
-            TeamId = teamId;
         }
 
         public (IList<string> errors, bool isValid) Validate()

@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Domain.Authentication;
+using Domain.Players;
+using Domain.TeamPlayers;
 
 namespace WebAPI
 {
@@ -67,7 +69,10 @@ namespace WebAPI
             services.AddScoped<IUsersRepository, UsersRepository>();
             services.AddScoped<IUsersService, UsersService>();
             services.AddScoped<ITeamsRepository, TeamsRepository>();
+            services.AddScoped<ITeamPlayersRepository, TeamPlayersRepository>();
             services.AddScoped<ITeamsService, TeamsService>();
+            services.AddScoped<IPlayersRepository, PlayersRepository>();
+            services.AddScoped<IPlayersService, PlayersService>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ITokenService, TokenService>();
         }
@@ -76,12 +81,12 @@ namespace WebAPI
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseCors("any");
-            // using (var db = new BrasileiraoContext())
-            // {
-            //     // Este comando irá criar o banco de dados (quando ele ainda não existir)
-            //     // Também executará todas as migrations e seeders
-            //     db.Database.Migrate();
-            // }
+            using (var db = new BrasileiraoContext())
+            {
+                // Este comando irá criar o banco de dados (quando ele ainda não existir)
+                // Também executará todas as migrations e seeders
+                db.Database.Migrate();
+            }
 
             if (env.IsDevelopment())
             {

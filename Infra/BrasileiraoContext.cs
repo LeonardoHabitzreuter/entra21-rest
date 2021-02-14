@@ -1,5 +1,6 @@
 using System.Reflection;
 using Domain.Players;
+using Domain.TeamPlayers;
 using Domain.Teams;
 using Domain.Users;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ namespace Infra
         public DbSet<User> Users { get; set; }
         public DbSet<Player> Players { get; set; }
         public DbSet<Team> Teams { get; set; }
+        public DbSet<TeamPlayer> TeamPlayers { get; set; }
 
         // override, pois estamos sobrescrevando o comportamento/método padrão
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using Domain.Common;
 
 namespace Infra
@@ -23,6 +24,16 @@ namespace Infra
         public T Get(Guid id)
         {
             return _entities.FirstOrDefault(x => x.Id == id);
+        }
+
+        public IList<T> GetAllIncluding<TProperty>(Expression<Func<T, TProperty>> includes)
+        {
+            return _entities;
+        }
+
+        public IList<T> GetAll()
+        {
+            return _entities;
         }
     }
 }

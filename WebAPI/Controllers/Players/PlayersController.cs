@@ -10,13 +10,13 @@ namespace WebAPI.Controllers.Players
     [Route("[controller]")]
     public class PlayersController : ControllerBase
     {
-        private readonly PlayersService _playersService;
+        private readonly IPlayersService _playersService;
         private readonly IUsersService _usersService;
         
-        public PlayersController(IUsersService usersService)
+        public PlayersController(IUsersService usersService, IPlayersService playersService)
         {
             _usersService = usersService;
-            _playersService = new PlayersService();
+            _playersService = playersService;
         }
 
         [HttpPost]
@@ -30,19 +30,6 @@ namespace WebAPI.Controllers.Players
             }
             
             return Ok(response.Id);
-        }
-
-        [HttpDelete("{id}")]
-        public IActionResult Remove(Guid id)
-        {
-            var playerRemoved = _playersService.Remove(id);
-
-            if (playerRemoved == null)
-            {
-                return NotFound();
-            }
-            
-            return NoContent();
         }
     }
 }

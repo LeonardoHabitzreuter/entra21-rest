@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using Domain.Common;
 
 namespace Domain.Users
@@ -24,6 +26,11 @@ namespace Domain.Users
         public User Get(Guid id)
         {
             return _repository.Get(id);
+        }
+
+        public IList<User> GetAllIncluding<TProperty>(Expression<Func<User, TProperty>> includes)
+        {
+            return _repository.GetAllIncluding(includes);
         }
     }
 }
