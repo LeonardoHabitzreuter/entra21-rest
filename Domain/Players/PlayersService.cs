@@ -21,10 +21,8 @@ namespace Domain.Players
 
             if (playerValidation.isValid)
             {
-                var teamPlayer = new TeamPlayer(teamId, player.Id);
-
+                player.AddTeam(teamId);
                 _playersRepository.Add(player);
-                _teamPlayersRepository.Add(teamPlayer);
 
                 return new CreatedPlayerDTO(player.Id);
             }
