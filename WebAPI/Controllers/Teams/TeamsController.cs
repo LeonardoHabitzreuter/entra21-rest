@@ -49,7 +49,7 @@ namespace WebAPI.Controllers.Teams
             
             var resp = teams.Select(x => new {
                 name = x.Name,
-                players = x.Players.Select(y => y.Player.Name)
+                playersCount = x.Players.Count()
             });
             return Ok(resp);
         }

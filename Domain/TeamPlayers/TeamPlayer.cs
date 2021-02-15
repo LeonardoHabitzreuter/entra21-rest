@@ -12,6 +12,8 @@ namespace Domain.TeamPlayers
         public virtual Player Player { get; private set; }
         public Guid PlayerId { get; private set; }
 
+        public TeamPlayer(Guid id) : base(id) {}
+
         public TeamPlayer(Guid teamId, Guid playerId)
         {
             TeamId = teamId;

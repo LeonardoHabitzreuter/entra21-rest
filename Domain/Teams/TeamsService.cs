@@ -26,7 +26,7 @@ namespace Domain.Teams
 
         public IList<Team> GetAll()
         {
-            return _teamsRepository.GetAllIncluding(x => x.Players);
+            return _teamsRepository.GetAllIncludingPlayers();
         }
     }
 }

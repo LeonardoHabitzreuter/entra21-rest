@@ -16,6 +16,7 @@ using Domain.Players;
 using Domain.TeamPlayers;
 using FluentValidation.AspNetCore;
 using WebAPI.Controllers.Users;
+using Infra.Repositories;
 
 namespace WebAPI
 {
@@ -80,6 +81,7 @@ namespace WebAPI
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ICrypt, Crypt>();
             services.AddScoped<ITokenService, TokenService>();
+            services.AddDbContext<BrasileiraoContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

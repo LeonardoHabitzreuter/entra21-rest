@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Domain.Common;
 
-namespace Infra
+namespace Infra.Repositories
 {
     public class RepositoryInMemory<T> : IRepository<T> where T : Entity
     {
