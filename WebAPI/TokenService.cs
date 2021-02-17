@@ -10,12 +10,16 @@ namespace WebAPI
 {
     public class TokenService : ITokenService
     {
-        private const string Secret = "mY.Sec&rt@Ke2021";
-
         public string GenerateToken(User user)
         {
+            var privateKey = Environment.GetEnvironmentVariable("private_key", EnvironmentVariableTarget.Process);
+            if (string.IsNullOrEmpty(privateKey))
+            {
+                privateKey = Environment.GetEnvironmentVariable("private_key", EnvironmentVariableTarget.Process);
+            }
+            
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(Secret);
+            var key = Encoding.ASCII.GetBytes(privateKey);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]

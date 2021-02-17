@@ -17,12 +17,12 @@ using Domain.TeamPlayers;
 using FluentValidation.AspNetCore;
 using WebAPI.Controllers.Users;
 using Infra.Repositories;
+using System;
 
 namespace WebAPI
 {
     public class Startup
     {
-        private const string Secret = "mY.Sec&rt@Ke2021";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -50,7 +50,13 @@ namespace WebAPI
                 .AddControllers()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateUserValidator>());
             
-            var key = Encoding.ASCII.GetBytes(Secret);
+            var privateKey = Environment.GetEnvironmentVariable("private_key", EnvironmentVariableTarget.Machine);
+            if (string.IsNullOrEmpty(privateKey))
+            {
+                privateKey = Environment.GetEnvironmentVariable("private_key", EnvironmentVariableTarget.Process);
+            }
+
+            var key = Encoding.ASCII.GetBytes(privateKey);
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
